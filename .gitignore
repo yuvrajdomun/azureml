@@ -22,8 +22,8 @@ logs/**
 # keep also the example dataset
 !data/01_raw/iris.csv
 
-# keep also the example dataset
-!.azureml/**
+# ignore all config in azureml
+.azureml/**
 
 ##########################
 # Common files
