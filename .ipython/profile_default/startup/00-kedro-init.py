@@ -54,5 +54,41 @@ def reload_kedro(path, line=None):
         )
         raise err
 
+@register_line_magic
+def reload_azureml_ws(line=None):
+    global ws
+    global conf_catalog
+    try:
+        import azureml.core
+        from azureml.core import Workspace
+    except ImportError:
+        logging.error(
+            "azureml appears not to be installed in your current environment "
+        )
+        raise
+
+    # Load the workspace from the saved config file
+    try:
+        ws = Workspace.from_config()
+        print('Ready to use Azure ML {} to work with {}'.format(azureml.core.VERSION, ws.name))
+        print('Imported workspace as ws')
+    except:
+        logging.error(
+            "Azureml Workspace appear to not exist, please make sure workspace has been created and config in right folder. "
+        )
+        raise
+    # Load Credentials
+    try:
+        from kedro.config import ConfigLoader
+
+        conf_paths = ["conf/base", "conf/local"]
+        conf_loader = ConfigLoader(conf_paths)
+        conf_catalog = conf_loader.get("credentials*")
+    except:
+        logging.error(
+            "Failed to laod config from kedro.config"
+        )
+        raise
+    logging.info("Defined global variable `ws` and `conf_catalog`")
 
 reload_kedro(project_path)
