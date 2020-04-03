@@ -40,8 +40,3 @@
 # https://kedro.readthedocs.io/en/stable/04_user_guide/04_data_catalog.html
 
 
-datasample:
-  type: 'Datasets.AZblob_datastore_data'
-  credentials: azuremlprimary
-  container_path: 'data/01_raw'
-  local_path: 'data/01_raw'
