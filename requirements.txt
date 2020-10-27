@@ -59,7 +59,7 @@ configparser==3.7.4
 contextlib2==0.6.0.post1
 cookiecutter==1.7.0
 coverage==5.0.4
-cryptography==2.9
+cryptography==3.2
 cycler==0.10.0
 Cython==0.29.16
 decorator==4.4.2
